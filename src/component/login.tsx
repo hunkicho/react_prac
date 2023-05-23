@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 import { checkId, login } from "../service/apiService"
+import {setCookie} from "../util/cookie"
 
 function LoginForm() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
   const onClickLogin = async () => {
-    const isLogin = await login(id, password);
+    const result = await login(id, password);
+    if(result){
+      setCookie('accessToken', result.access_token);
+      setCookie('refreshToken', result.refresh_token);
+    }else{
+      alert("아이디나 비밀번호를 확인해주세요");
+    }
   }
 
 

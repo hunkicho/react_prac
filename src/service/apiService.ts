@@ -14,6 +14,6 @@ export const login = async (id: String, password: String) => {
       const response = await axios.post('http://localhost:8888/login', {id, password});
       return response.data;
     } catch (error) {
-        throw new Error('Error fetching data');
+        console.log(error);
     }
  };
